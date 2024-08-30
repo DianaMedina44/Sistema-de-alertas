@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<main class="container">
+    <div class="row d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="col-md-6">
+            <div class="card mt-5">
+                <div class="card-body">
+                    <h1 class="text-center">Registro de Usuario</h1>
+
+                    {% if messages %}
+                        <div class="alert alert-success">
+                            {% for message in messages %}
+                                <p>{{ message }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <form method="post" action="">
+                        {% csrf_token %}
+
+                        <!-- Campo de Nombre de Usuario -->
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Nombre de Usuario:</label>
+                            <input type="text" name="username" id="username" class="form-control" placeholder="Escribe tu usuario" value="{{ form.username.value|default:'' }}">
+                            <!-- Mostrar errores para el campo username -->
+                            {% if form.username.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.username.errors %}
+                                        <small>{{ error }}</small><br>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Campo de Correo Electrónico -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Correo Electrónico:</label>
+                            <input type="email" name="email" id="email" class="form-control" placeholder="Escribe tu correo electrónico" value="{{ form.email.value|default:'' }}">
+                            <!-- Mostrar errores para el campo email -->
+                            {% if form.email.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.email.errors %}
+                                        <small>{{ error }}</small><br>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Campo de Identificación -->
+                        <div class="mb-3">
+                            <label for="identificacion" class="form-label">Identificación:</label>
+                            <input type="text" name="identificacion" id="identificacion" class="form-control" placeholder="Escribe tu identificación" value="{{ form.identificacion.value|default:'' }}">
+                            <!-- Mostrar errores para el campo identificacion -->
+                            {% if form.identificacion.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.identificacion.errors %}
+                                        <small>{{ error }}</small><br>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Campo de Rol -->
+                        <div class="mb-3">
+                            <label for="rol" class="form-label">Rol:</label>
+                            <input type="text" name="rol" id="rol" class="form-control" placeholder="Escribe tu rol" value="{{ form.rol.value|default:'' }}">
+                            <!-- Mostrar errores para el campo rol -->
+                            {% if form.rol.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.rol.errors %}
+                                        <small>{{ error }}</small><br>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Campo de Teléfono -->
+                        <div class="mb-3">
+                            <label for="telefono" class="form-label">Teléfono:</label>
+                            <input type="tel" name="telefono" id="telefono" class="form-control" placeholder="Escribe tu teléfono" value="{{ form.telefono.value|default:'' }}">
+                            <!-- Mostrar errores para el campo telefono -->
+                            {% if form.telefono.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.telefono.errors %}
+                                        <small>{{ error }}</small><br>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Campo de Ciudad -->
+                        <div class="mb-3">
+                            <label for="ciudad" class="form-label">Ciudad:</label>
+                            <input type="text" name="ciudad" id="ciudad" class="form-control" placeholder="Escribe tu ciudad" value="{{ form.ciudad.value|default:'' }}">
+                            <!-- Mostrar errores para el campo ciudad -->
+                            {% if form.ciudad.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.ciudad.errors %}
+                                        <small>{{ error }}</small><br>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Campo de Contraseña -->
+                        <div class="mb-3">
+                            <label for="password1" class="form-label">Contraseña:</label>
+                            <input type="password" name="password1" id="password1" class="form-control" placeholder="Escribe tu contraseña">
+                            <!-- Mostrar errores para el campo password1 -->
+                            {% if form.password1.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.password1.errors %}
+                                        <small>{{ error }}</small><br>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Campo de Confirmación de Contraseña -->
+                        <div class="mb-3">
+                            <label for="password2" class="form-label">Confirmar Contraseña:</label>
+                            <input type="password" name="password2" id="password2" class="form-control" placeholder="Confirma tu contraseña">
+                            <!-- Mostrar errores para el campo password2 -->
+                            {% if form.password2.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.password2.errors %}
+                                        <small>{{ error }}</small><br>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Registrarse</button>
+                        </div>
+                    </form>
+
+                    <div class="mt-3">
+                        <p class="text-center"><small class="text-muted">Ya tienes una cuenta? <a href="{% url 'inicio_sesion' %}">Inicia sesión aquí</a></small></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock contenido %}

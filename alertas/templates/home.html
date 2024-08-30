@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+<main class="container my-5">
+    <h1 class="text-center mb-4">Bienvenido a la Aplicación de Alertas</h1>
+    <p class="text-center mb-4">
+        Nuestra aplicación te permite gestionar y visualizar alertas de manera sencilla y eficiente. Aquí puedes reportar nuevas alertas, ver las existentes y estar al tanto de los eventos importantes en tu comunidad.
+    </p>
+
+    <div class="row">
+        <!-- Tarjeta de Información General -->
+        <div class="col-md-4 mb-4">
+            <div class="card border-radius shadow-sm h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title">¿Qué es una Alerta?</h5>
+                    <p class="card-text">
+                        Las alertas son informes importantes que puedes crear y seguir para mantener a tu comunidad informada sobre eventos relevantes. Puedes agregar descripciones, imágenes y detalles importantes para asegurar que todos estén al tanto.
+                    </p>
+                </div>
+                <div class="card-footer text-center bg-primary text-white">
+                    <small>Información General</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta de Cómo Crear una Alerta -->
+        <div class="col-md-4 mb-4">
+            <div class="card border-radius shadow-sm h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Cómo Crear una Alerta</h5>
+                    <p class="card-text">
+                        Para crear una nueva alerta, simplemente accede al formulario de creación de alertas, completa los campos necesarios y adjunta una imagen si lo deseas. ¡Es fácil y rápido!
+                    </p>
+                </div>
+                <div class="card-footer text-center bg-success text-white">
+                    <small>Guía Rápida</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta de Ver Alertas -->
+        <div class="col-md-4 mb-4">
+            <div class="card border-radius shadow-sm h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Ver Alertas</h5>
+                    <p class="card-text">
+                        En la sección de alertas, puedes ver todas las alertas reportadas, incluyendo sus detalles y la fecha de creación. Mantente informado sobre los eventos más recientes en tu comunidad.
+                    </p>
+                </div>
+                <div class="card-footer text-center bg-warning text-dark">
+                    <small>Ver Alertas</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<style>
+    .border-radius {
+        border-radius: 10px;
+    }
+    .shadow-sm {
+        box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
+    }
+    .card-body {
+        padding: 20px;
+    }
+    .card-title {
+        font-size: 1.25rem;
+        margin-bottom: 15px;
+        color: #333;
+    }
+    .card-text {
+        font-size: 1rem;
+        color: #555;
+    }
+    .card-footer {
+        padding: 10px;
+        font-size: 0.875rem;
+        font-weight: bold;
+    }
+    .container {
+        max-width: 960px;
+    }
+    .bg-primary {
+        background-color: #007bff !important;
+    }
+    .bg-success {
+        background-color: #28a745 !important;
+    }
+    .bg-warning {
+        background-color: #ffc107 !important;
+    }
+    .text-white {
+        color: #fff !important;
+    }
+    .text-dark {
+        color: #343a40 !important;
+    }
+    .h-100 {
+        height: 100%;
+    }
+</style>
+{% endblock contenido %}

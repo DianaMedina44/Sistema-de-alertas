@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alertas Ambientales</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+        header {
+            background: linear-gradient(45deg, #28a745, #85d3a3);
+        }
+        h1 {
+            font-weight: bold;
+        }
+        nav .nav-link {
+            color: #fff !important;
+        }
+        nav .nav-link:hover {
+            color: #d1ecf1 !important;
+        }
+        .container {
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .sombra {
+            box-shadow: 2px 2px 10px 4px rgb(14 55 54 / 15%)
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="text-white text-center py-4" style="height: 5rem;">
+        <h1>Sistema De Alertas Ambientales</h1>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sombra" style="background-color: #28a745;">
+        <a class="navbar-brand ml-5" href="{% url 'home' %}">Alertas Ambientales</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+
+
+                
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'ver_alertas' %}">Ver Alertas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'crear_alerta' %}">Crear Alerta</a>
+                </li>
+
+                <li class="nav-item">
+                        <a class="nav-link" href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a>
+                </li>
+
+                {% else %}
+
+
+                    <li class="nav-item">
+                        <a class="nav-link mr-5" href="{% url 'inicio_sesion' %}">Iniciar Sesión</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mr-5" href="{% url 'registro_usuario' %}">Registrarse</a>
+                    </li>
+
+                    
+                {% endif %}
+                    
+                
+
+
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        {% block contenido %}
+        {% endblock %}
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

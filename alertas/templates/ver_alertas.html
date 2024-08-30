@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<main class='container mt-4'>
+    <h1 class='text-center mb-4'>Alertas</h1>
+    <!-- Mostrar mensajes -->
+    {% if messages %}
+    <div class="alert-container">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="row">
+        {% for alerta in alertas %}
+            <div class="col-md-4 mb-3">
+                <div class="card" style="height: 100%; display: flex; flex-direction: column;">
+                    {% if alerta.imagen_multimedia %}
+                        <img src="{{ alerta.imagen_multimedia.url }}" class="card-img-top" alt="Imagen de alerta" style="object-fit: cover; height: 200px;">
+                    {% endif %}
+                    <div class="card-body" style="flex: 1;">
+                        <h5 class="card-title">{{ alerta.titulo }}</h5>
+                        <p class="card-text">{{ alerta.descripcion|slice:":100" }}{% if alerta.descripcion|length > 100 %}...{% endif %}</p>
+                        <p class="card-text text-muted">{{ alerta.fecha_creacion }}</p>
+                        <a href="{% url 'alerta_detalle' pk=alerta.pk %}" class="btn btn-primary">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <p class="text-center">No hay alertas disponibles.</p>
+            </div>
+        {% endfor %}
+    </div>
+</main>
+{% endblock contenido %}

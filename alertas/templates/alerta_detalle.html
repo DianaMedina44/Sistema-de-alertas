@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<main class="container mt-4">
+    <h1 class="text-center mb-4">Detalles de la Alerta</h1>
+    <div class="card">
+        {% if alerta.imagen_multimedia %}
+            <img src="{{ alerta.imagen_multimedia.url }}" class="card-img-top" alt="Imagen de alerta">
+        {% endif %}
+        <div class="card-body" style="background-color: #f8f9fa; border-left: 5px solid #007bff; padding: 20px; border-radius: 5px;">
+            <h5 class="card-title" style="color: #007bff; font-weight: bold;">{{ alerta.titulo }}</h5>
+            <p class="card-text" style="color: #555;"><strong>Usuario:</strong> {{ alerta.usuario }}</p>
+            <p class="card-text" style="color: #333;">{{ alerta.descripcion }}</p>
+            <p class="card-text text-muted">Fecha de Creación: {{ alerta.fecha_creacion }}</p>
+            <p class="card-text style="color: #333;">Ubicación: {{ alerta.ubicacion }}</p>
+            <p class="card-text style="color: #dc3545;">Gravedad: {{ alerta.gravedad }}</p>
+            <p class="card-text text-muted">
+                Estado de Notificación: 
+                {% if notificada %}
+                    <span class="text-success">Notificada</span>
+                {% else %}
+                    <span class="text-danger">No Notificada</span>
+                {% endif %}
+            </p>
+        </div>
+
+        
+                  <div class="card-footer">
+                    <h6 class="mt-3">Comentarios</h6>
+                    <div class="comentarios-section">
+                        {% for comentario in alerta.comentario_set.all %}
+                            <div class="media mb-3 p-3 rounded" style="background-color: #f1f1f1;">
+                                <div class="media-body">
+                                    <h6 class="mt-0" style="font-weight: bold; color: #007bff;">{{ comentario.usuario.username }}</h6>
+                                    <p>{{ comentario.contenido }}</p>
+                                    <p class="text-muted"><small>{{ comentario.fecha_creacion|date:"d M Y, H:i" }}</small></p>
+                                </div>
+                            </div>
+                        {% empty %}
+                            <p>No hay comentarios.</p>
+                        {% endfor %}
+                    </div>
+                    <form action="{% url 'alerta_detalle' pk=alerta.pk %}" method="post" class="mt-3">
+                        {% csrf_token %}
+                        <input type="hidden" name="alerta_id" value="{{ alerta.id }}">
+                        <div class="form-group">
+                            <textarea name="contenido" class="form-control" rows="2" placeholder="Añadir un comentario..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-sm btn-primary">Comentar</button>
+                    </form>
+                </div>
+    </div>
+    <div class="text-center mt-4">
+        <a href="{% url 'ver_alertas' %}" class="btn btn-secondary">Volver a Alertas</a>
+    </div>
+</main>
+<style>
+    .feed {
+        display: flex;
+        flex-direction: column;
+    }
+    .alerta-card {
+        border-radius: 10px;
+        width: 100%;
+    }
+    .shadow-sm {
+        box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
+    }
+    .card-body {
+        padding: 15px;
+    }
+    .card-footer {
+        padding: 15px;
+        background-color: #f8f9fa;
+        border-top: 1px solid #e9ecef;
+    }
+    .card-title {
+        font-size: 1.25rem;
+        color: #333;
+    }
+    .card-text {
+        font-size: 1rem;
+        color: #555;
+    }
+    .media {
+        display: flex;
+        align-items: flex-start;
+    }
+    .media-body {
+        margin-left: 10px;
+    }
+    .media-body h6 {
+        margin-top: 0;
+        font-size: 1rem;
+    }
+    .media-body p {
+        margin-bottom: 0.5rem;
+    }
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+    }
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+</style>
+{% endblock contenido %}
+
+
+
+

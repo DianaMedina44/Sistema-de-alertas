@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<main class='container' style="width: 30rem;">
+    <div class="row">
+        <div class="col-12">
+            <!-- Formulario para crear una alerta -->
+            <form action="{% url 'crear_alerta' %}" method="POST" enctype="multipart/form-data" class="card mt-5 p-4">
+                {% csrf_token %}
+                <h1 class="text-center mb-4">Crear Alerta</h1>
+
+                <!-- Mostrar errores de formulario -->
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {% for error in form.non_field_errors %}
+                            <div>{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <!-- Campo Titulo -->
+                <div class="form-group">
+                    <label for="{{ form.titulo.id_for_label }}">Típo de Alerta:</label>
+                    {{ form.titulo }}
+                    {% if form.titulo.errors %}
+                        <div class="text-danger">
+                            {% for error in form.titulo.errors %}
+                                <small>{{ error }}</small><br>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Campo Descripción -->
+                <div class="form-group">
+                    <label for="{{ form.descripcion.id_for_label }}">Descripción:</label>
+                    <textarea name="descripcion" id="{{ form.descripcion.id_for_label }}" class="form-control" rows="4">{{ form.descripcion.value|default:'' }}</textarea>
+                    {% if form.descripcion.errors %}
+                        <div class="text-danger">
+                            {% for error in form.descripcion.errors %}
+                                <small>{{ error }}</small><br>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Campo Ubicación -->
+                <div class="form-group">
+                    <label for="{{ form.ubicacion.id_for_label }}">Ubicación:</label>
+                    <input type="text" name="ubicacion" id="{{ form.ubicacion.id_for_label }}" class="form-control" value="{{ form.ubicacion.value|default:'' }}">
+                    {% if form.ubicacion.errors %}
+                        <div class="text-danger">
+                            {% for error in form.ubicacion.errors %}
+                                <small>{{ error }}</small><br>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Campo Gravedad -->
+                <div class="form-group">
+                    <label for="{{ form.gravedad.id_for_label }}">Gravedad:</label>
+                    {{ form.gravedad }}
+                    {% if form.gravedad.errors %}
+                        <div class="text-danger">
+                            {% for error in form.gravedad.errors %}
+                                <small>{{ error }}</small><br>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Campo Imagen Multimedia -->
+                <div class="form-group">
+                    <label for="{{ form.imagen_multimedia.id_for_label }}" class="form-label">Imagen Multimedia:</label>
+                    <div class="custom-file">
+                        <input type="file" name="imagen_multimedia" id="{{ form.imagen_multimedia.id_for_label }}" class="custom-file-input" accept="image/*">
+                        <label class="custom-file-label" for="{{ form.imagen_multimedia.id_for_label }}">Selecciona un archivo...</label>
+                    </div>
+                    {% if form.imagen_multimedia.errors %}
+                        <div class="text-danger mt-2">
+                            {% for error in form.imagen_multimedia.errors %}
+                                <small>{{ error }}</small><br>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Crear Alerta</button>
+                </div>   
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock contenido %}
